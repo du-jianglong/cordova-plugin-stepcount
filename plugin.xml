@@ -9,7 +9,6 @@
     </js-module>
     <platform name="android">
 
-        <framework src="com.android.support:support-v4:24.1.1+" value="gradle" />
         <framework src="com.android.support:support-v4:+" value="gradle" />
 
         <config-file parent="/*" target="res/xml/config.xml">
