@@ -1,48 +1,32 @@
 package org.apache.cordova.plugin;
 
-import java.io.File;
-import java.util.Arrays;
-
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ComponentName;
 import android.content.ServiceConnection;
-import android.content.pm.PackageManager;
 
-import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
-import org.apache.cordova.CordovaInterface;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.os.IBinder;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import android.support.v7.app.AppCompatActivity;
 import cn.bluemobi.dylan.step.step.service.StepService;
 
 public class StepCount extends CordovaPlugin{
 
-	private CallbackContext context;
-	private Activity activity;
+    private CallbackContext context;
+    private Activity activity;
     private boolean isBind = false;
 
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         activity = this.cordova.getActivity();
-		context = callbackContext;
+        context = callbackContext;
         if (action.equals("start")) {
-    		setupService();
+            setupService();
         }
         return false;
     }
@@ -51,9 +35,9 @@ public class StepCount extends CordovaPlugin{
      * 开启计步服务
      */
     private void setupService() {
-        Intent intent = new Intent(this, StepService.class);
-        isBind = bindService(intent, conn, Context.BIND_AUTO_CREATE);
-        startService(intent);
+        Intent intent = new Intent(activity, StepService.class);
+        isBind = cordova.getActivity().bindService(intent, conn, Context.BIND_AUTO_CREATE);
+        cordova.getActivity().startService(intent);
     }
 
     /**
@@ -70,18 +54,6 @@ public class StepCount extends CordovaPlugin{
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             StepService stepService = ((StepService.StepBinder) service).getService();
-            //设置初始化数据
-            String planWalk_QTY = (String) sp.getParam("planWalk_QTY", "7000");
-            cc.setCurrentCount(Integer.parseInt(planWalk_QTY), stepService.getStepCount());
-
-            //设置步数监听回调
-            stepService.registerCallback(new UpdateUiCallBack() {
-                @Override
-                public void updateUi(int stepCount) {
-                    String planWalk_QTY = (String) sp.getParam("planWalk_QTY", "7000");
-                    cc.setCurrentCount(Integer.parseInt(planWalk_QTY), stepCount);
-                }
-            });
         }
 
         /**
@@ -101,8 +73,8 @@ public class StepCount extends CordovaPlugin{
     public void onDestroy() {
         super.onDestroy();
         if (isBind) {
-            this.unbindService(conn);
+            cordova.getActivity().unbindService(conn);
         }
     }
- 
+
 }
