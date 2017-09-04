@@ -24,8 +24,7 @@ public class StepCount extends CordovaPlugin{
     private Activity activity;
     private boolean isBind = false;
 
-
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+    public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         activity = this.cordova.getActivity();
         context = callbackContext;
         if (action.equals("start")) {
