@@ -72,7 +72,7 @@
         <source-file src="src/android/step/utils/SharedPreferencesUtils.java" target-dir="src/cn/bluemobi/dylan/step/step/utils" />
         <source-file src="src/android/step/utils/StepCountModeDispatcher.java" target-dir="src/cn/bluemobi/dylan/step/step/utils" />
 
-        <source-file src="src/android/libs/lite-orm-1.7.0.jar" target-dir="src/libs" />
+        <source-file src="src/android/libs/lite-orm-1.7.0.jar" target-dir="libs" />
 
     </platform>
 </plugin>
