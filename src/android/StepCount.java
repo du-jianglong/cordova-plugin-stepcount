@@ -55,10 +55,6 @@ public class StepCount extends CordovaPlugin{
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             StepService stepService = ((StepService.StepBinder) service).getService();
-            //设置初始化数据
-            String planWalk_QTY = (String) sp.getParam("planWalk_QTY", "7000");
-            cc.setCurrentCount(Integer.parseInt(planWalk_QTY), stepService.getStepCount());
-
             //设置步数监听回调
             stepService.registerCallback(new UpdateUiCallBack() {
                 @Override

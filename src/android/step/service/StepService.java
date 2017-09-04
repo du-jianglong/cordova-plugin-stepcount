@@ -23,8 +23,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import com.com.wxwubian.ncccion.R;
-import com.com.wxwubian.ncccion.MainActivity;
+import com.wxwubian.ncccion.R;
+import com.wxwubian.ncccion.MainActivity;
 import cn.bluemobi.dylan.step.step.UpdateUiCallBack;
 import cn.bluemobi.dylan.step.step.accelerometer.StepCount;
 import cn.bluemobi.dylan.step.step.accelerometer.StepValuePassListener;
