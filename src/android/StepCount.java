@@ -28,19 +28,12 @@ public class StepCount extends CordovaPlugin{
         activity = this.cordova.getActivity();
         context = callbackContext;
         if (action.equals("start")) {
-
-            setupService();
+            Intent intent = new Intent(activity, StepService.class);
+            isBind = cordova.getActivity().bindService(intent, conn, Context.BIND_AUTO_CREATE);
+            cordova.getActivity().startService(intent);
+            callbackContext.success("正在读取计步");
         }
         return false;
-    }
-
-    /**
-     * 开启计步服务
-     */
-    private void setupService() {
-        Intent intent = new Intent(activity, StepService.class);
-        isBind = cordova.getActivity().bindService(intent, conn, Context.BIND_AUTO_CREATE);
-        cordova.getActivity().startService(intent);
     }
 
     /**
