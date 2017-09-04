@@ -8,6 +8,7 @@ import android.content.ServiceConnection;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.PluginResult;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,14 +20,16 @@ import cn.bluemobi.dylan.step.step.UpdateUiCallBack;
 
 public class StepCount extends CordovaPlugin{
 
-    private CallbackContext context;
+    final private CallbackContext context;
     private Activity activity;
     private boolean isBind = false;
+
 
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         activity = this.cordova.getActivity();
         context = callbackContext;
         if (action.equals("start")) {
+
             setupService();
         }
         return false;
@@ -59,7 +62,9 @@ public class StepCount extends CordovaPlugin{
             stepService.registerCallback(new UpdateUiCallBack() {
                 @Override
                 public void updateUi(int stepCount) {
-                    Log.d(TAG, stepCount);
+                    PluginResult result = new PluginResult(PluginResult.Status.OK, "stepCount");
+                    result.setKeepCallback(true);
+                    context.sendPluginResult(result);
                 }
             });
         }
