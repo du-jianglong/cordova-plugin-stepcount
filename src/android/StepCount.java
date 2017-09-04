@@ -20,7 +20,7 @@ import cn.bluemobi.dylan.step.step.UpdateUiCallBack;
 
 public class StepCount extends CordovaPlugin{
 
-    final private CallbackContext context;
+    private CallbackContext context;
     private Activity activity;
     private boolean isBind = false;
 
