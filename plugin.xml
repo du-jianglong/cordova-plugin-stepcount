@@ -59,6 +59,8 @@
         <source-file src="src/android/pedometer/StepListener.java" target-dir="src/cn/bluemobi/dylan/step/pedometer" />
         <source-file src="src/android/pedometer/StepsDetectService.java" target-dir="src/cn/bluemobi/dylan/step/pedometer" />
 
+        <source-file src="src/android/step/UpdateUiCallBack.java" target-dir="src/cn/bluemobi/dylan/step/step/" />
+
         <source-file src="src/android/step/accelerometer/StepCount.java" target-dir="src/cn/bluemobi/dylan/step/step/accelerometer" />
         <source-file src="src/android/step/accelerometer/StepCountListener.java" target-dir="src/cn/bluemobi/dylan/step/step/accelerometer" />
         <source-file src="src/android/step/accelerometer/StepDetector.java" target-dir="src/cn/bluemobi/dylan/step/step/accelerometer" />

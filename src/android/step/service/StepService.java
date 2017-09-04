@@ -23,8 +23,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import com.ionicframework.demo461410.R;
-import com.ionicframework.demo461410.MainActivity;
+import com.com.wxwubian.ncccion.R;
+import com.com.wxwubian.ncccion.MainActivity;
+import cn.bluemobi.dylan.step.step.UpdateUiCallBack;
 import cn.bluemobi.dylan.step.step.accelerometer.StepCount;
 import cn.bluemobi.dylan.step.step.accelerometer.StepValuePassListener;
 import cn.bluemobi.dylan.step.step.bean.StepData;
@@ -271,9 +272,26 @@ public class StepService extends Service implements SensorEventListener {
                 .setContentIntent(hangPendingIntent)
                 .build();
         mNotificationManager.notify(notifyId_Step, notification);
+        if (mCallback != null) {
+            mCallback.updateUi(CURRENT_STEP);
+        }
         Log.d(TAG, "updateNotification()");
     }
 
+    /**
+     * UI监听器对象
+     */
+    private UpdateUiCallBack mCallback;
+
+    /**
+     * 注册UI更新监听
+     *
+     * @param paramICallback
+     */
+    public void registerCallback(UpdateUiCallBack paramICallback) {
+        this.mCallback = paramICallback;
+    }
+    
     /**
      * 记步Notification的ID
      */
