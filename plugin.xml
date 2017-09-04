@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin id="cordova-plugin-stepcount" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>stepcount</name>
+    <description>Cordova stepcount Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,stepcount</keywords>
+    <js-module name="stepcount" src="www/stepcount.js">
+        <clobbers target="stepcount" />
+    </js-module>
+    <platform name="android">
+
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="StepCount">
+                <param name="android-package" value="org.apache.cordova.plugin.StepCount" />
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <service android:name=".step.service.StepService" android:priority="1000">
+                <intent-filter>
+                    <action android:name="android.intent.action.BOOT_COMPLETED" />
+                    <action android:name="android.intent.action.DATE_CHANGED" />
+                    <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                    <action android:name="android.intent.action.USER_PRESENT" />
+                    <action android:name="android.intent.action.ACTION_TIME_TICK" />
+                    <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                    <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                </intent-filter>
+            </service>
+            <service android:name=".pedometer.StepsDetectService" android:priority="1000" android:process="cn.bluemobi.dylan.step..pedometer.StepsDetectService">
+                <intent-filter>
+                    <action android:name="android.intent.action.BOOT_COMPLETED" />
+                    <action android:name="android.intent.action.DATE_CHANGED" />
+                    <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                    <action android:name="android.intent.action.USER_PRESENT" />
+                    <action android:name="android.intent.action.ACTION_TIME_TICK" />
+                    <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                    <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                </intent-filter>
+            </service>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.VIBRATE" />
+            <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+            <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+            <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+            <uses-feature android:name="android.hardware.sensor.accelerometer" />
+            <uses-feature android:name="android.hardware.sensor.stepcounter" android:required="true" />
+            <uses-feature android:name="android.hardware.sensor.stepdetector" android:required="true" />
+        </config-file>
+
+        <source-file src="src/android/StepCount.java" target-dir="src/org/apache/cordova/plugin/" />
+
+        <source-file src="src/android/pedometer/StepDetector.java" target-dir="src/cn/bluemobi/dylan/step/pedometer" />
+        <source-file src="src/android/pedometer/StepListener.java" target-dir="src/cn/bluemobi/dylan/step/pedometer" />
+        <source-file src="src/android/pedometer/StepsDetectService.java" target-dir="src/cn/bluemobi/dylan/step/pedometer" />
+
+        <source-file src="src/android/step/accelerometer/StepCount.java" target-dir="src/cn/bluemobi/dylan/step/step/accelerometer" />
+        <source-file src="src/android/step/accelerometer/StepCountListener.java" target-dir="src/cn/bluemobi/dylan/step/step/accelerometer" />
+        <source-file src="src/android/step/accelerometer/StepDetector.java" target-dir="src/cn/bluemobi/dylan/step/step/accelerometer" />
+        <source-file src="src/android/step/accelerometer/StepValuePassListener.java" target-dir="src/cn/bluemobi/dylan/step/step/accelerometer" />
+
+        <source-file src="src/android/step/bean/StepData.java" target-dir="src/cn/bluemobi/dylan/step/step/bean" />
+
+        <source-file src="src/android/step/config/Constant.java" target-dir="src/cn/bluemobi/dylan/step/step/config" />
+
+        <source-file src="src/android/step/service/StepService.java" target-dir="src/cn/bluemobi/dylan/step/step/service" />
+
+        <source-file src="src/android/step/utils/CountDownTimer.java" target-dir="src/cn/bluemobi/dylan/step/step/utils" />
+        <source-file src="src/android/step/utils/DbUtils.java" target-dir="src/cn/bluemobi/dylan/step/step/utils" />
+        <source-file src="src/android/step/utils/SharedPreferencesUtils.java" target-dir="src/cn/bluemobi/dylan/step/step/utils" />
+        <source-file src="src/android/step/utils/StepCountModeDispatcher.java" target-dir="src/cn/bluemobi/dylan/step/step/utils" />
+
+        <source-file src="src/android/libs/lite-orm-1.7.0.jar" target-dir="src/libs" />
+
+    </platform>
+</plugin>

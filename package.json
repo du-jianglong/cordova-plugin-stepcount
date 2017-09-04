@@ -1,0 +1,27 @@
+{
+  "name": "cordova-plugin-stepcount",
+  "version": "0.0.1",
+  "description": "Cordova stepcount Plugin",
+  "cordova": {
+    "id": "cordova-plugin-stepcount",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taofengno1/cordova-plugin-stepcount.git"
+  },
+  "keywords": [
+    "cordova",
+    "stepcount",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Alex.Tao",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/taofengno1/cordova-plugin-stepcount/issues"
+  },
+  "homepage": "https://github.com/taofengno1/cordova-plugin-stepcount#readme"
+}
