@@ -28,9 +28,13 @@ public class StepCount extends CordovaPlugin{
         activity = this.cordova.getActivity();
         context = callbackContext;
         if (action.equals("start")) {
-            Intent intent = new Intent(activity, StepService.class);
-            isBind = cordova.getActivity().bindService(intent, conn, Context.BIND_AUTO_CREATE);
-            cordova.getActivity().startService(intent);
+            cordova.getThreadPool().execute(new Runnable() {
+              public void run() {
+                Intent intent = new Intent(activity, StepService.class);
+                isBind = activity.bindService(intent, conn, Context.BIND_AUTO_CREATE);
+                activity.startService(intent);
+              }
+            });
             return true;
         }
         return false;
@@ -78,7 +82,7 @@ public class StepCount extends CordovaPlugin{
     public void onDestroy() {
         super.onDestroy();
         if (isBind) {
-            cordova.getActivity().unbindService(conn);
+          activity.unbindService(conn);
         }
     }
 
